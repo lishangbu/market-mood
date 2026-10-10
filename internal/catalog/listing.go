@@ -11,12 +11,6 @@ import (
 	"time"
 )
 
-// Verified against the issuer's announcement, section 一, page 1. The company
-// profile currently has no listing date; this is evidence, not an inferred date.
-var verifiedListingDates = map[string]struct{ date, source string }{
-	"sz301286": {"2022-06-14", "https://static.cninfo.com.cn/finalpage/2023-06-16/1217087681.PDF"},
-}
-
 var companyTable = regexp.MustCompile(`(?s)<table\s+id="comInfo1"[^>]*>(.*?)</table>`)
 var listingLink = regexp.MustCompile(`stockid=([0-9]{6})&(?:amp;)?InMarketDate=[0-9]+"[^>]*>\s*([0-9]{4}-[0-9]{2}-[0-9]{2})\s*</a>`)
 
@@ -59,9 +53,9 @@ func (c *Client) SupplementListingDates(ctx context.Context, rows []Security) ma
 					continue
 				}
 				if verified, ok := verifiedListingDates[j.row.Exchange+j.row.Code]; ok {
-					date := verified.date
+					date := verified.Date
 					rows[j.index].ListingDate = &date
-					rows[j.index].Provider = j.row.Provider + "（上市日期：公司公告 " + verified.source + "）"
+					rows[j.index].Provider = j.row.Provider + "（上市日期：公司公告 " + verified.Source + "）"
 					mu.Lock()
 					counts[j.row.Exchange]++
 					mu.Unlock()

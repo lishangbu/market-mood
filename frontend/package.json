@@ -7,7 +7,7 @@
     "dev": "vite --host 0.0.0.0",
     "build": "tsc -b && vite build",
     "test:e2e": "playwright test",
-    "format:check": "prettier --check \"src/**/*.{ts,tsx}\" \"tests/**/*.ts\" playwright.config.ts tsconfig.json"
+    "format:check": "prettier --check \"src/**/*.{ts,tsx}\" \"tests/**/*.ts\" playwright.config.ts tsconfig.json \"../scripts/*.{mjs,cjs}\""
   },
   "dependencies": {
     "lucide-react": "^0.468.0",

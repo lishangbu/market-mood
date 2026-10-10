@@ -96,7 +96,7 @@ Vite 将 `/api` 请求代理到 `127.0.0.1:8080`。前端源码改动后，发�
 | `--data-dir` | `MARKET_MOOD_DATA_DIR` | 当前工作目录 |
 | `--db` | `MARKET_MOOD_DB` | 显式数据库路径，优先于数据目录 |
 
-`Ctrl+C` 或 `SIGTERM` 会停止采集并排空 HTTP 请求。本机开发服务采用手动启动，不设置登录自启动，参见 [本机开发说明](docs/local-web-service.md)。
+`Ctrl+C` 或 `SIGTERM` 会停止采集并排空 HTTP 请求。开发环境按需手动启动服务，参见 [本机开发说明](docs/development.md)。
 
 ## 服务器部署
 
@@ -121,7 +121,7 @@ npx playwright install chromium
 npm run test:e2e -- --workers=2
 ```
 
-已完成前端构建时，可直接运行 `CGO_ENABLED=0 go test ./...`。已有 Chrome 可通过 `MARKET_MOOD_BROWSER_CHANNEL=chrome` 使用，或设置 `MARKET_MOOD_BROWSER_PATH` 指定 Chromium 可执行文件。
+Make 会根据依赖和源码变化增量安装依赖、构建前端，连续运行测试和静态检查不会重复构建。已完成前端构建时，可直接运行 `CGO_ENABLED=0 go test ./...`。已有 Chrome 可通过 `MARKET_MOOD_BROWSER_CHANNEL=chrome` 使用，或设置 `MARKET_MOOD_BROWSER_PATH` 指定 Chromium 可执行文件。
 
 真实数据源检查：
 

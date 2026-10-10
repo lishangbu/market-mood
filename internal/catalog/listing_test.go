@@ -55,3 +55,27 @@ func TestSupplementListingDatesPreservesVerifiedAndRejectsWrongStock(t *testing.
 		t.Fatal("wrong stock adopted", rows[2], checks)
 	}
 }
+
+func TestIssuerEvidenceSupplementDoesNotFetchOrOverwriteDirectory(t *testing.T) {
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		t.Error("verified issuer evidence should not request a company profile")
+		http.Error(w, "unexpected request", 500)
+	}))
+	defer server.Close()
+	c := New(server.Client())
+	c.SinaBase = server.URL
+	row, _ := NewSecurity("301286", "侨源股份", "sz", "新浪")
+	rows := []Security{row}
+	c.SupplementListingDates(context.Background(), rows)
+	if rows[0].ListingDate == nil || *rows[0].ListingDate != "2022-06-14" || !strings.Contains(rows[0].Provider, "1217087681.PDF") {
+		t.Fatal("issuer evidence missing", rows[0])
+	}
+	official := "2022-06-15"
+	row.ListingDate = &official
+	row.Provider = "深交所"
+	rows = []Security{row}
+	c.SupplementListingDates(context.Background(), rows)
+	if *rows[0].ListingDate != official || rows[0].Provider != "深交所" {
+		t.Fatal("directory evidence overwritten", rows[0])
+	}
+}
