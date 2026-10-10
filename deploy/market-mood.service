@@ -1,0 +1,23 @@
+[Unit]
+Description=Market Mood Go service
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+DynamicUser=yes
+StateDirectory=market-mood
+WorkingDirectory=/var/lib/market-mood
+ExecStart=/opt/market-mood/market-mood --bind 127.0.0.1:8080 --data-dir /var/lib/market-mood
+Restart=on-failure
+RestartSec=5s
+TimeoutStopSec=15s
+KillSignal=SIGTERM
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+RestrictSUIDSGID=yes
+
+[Install]
+WantedBy=multi-user.target
