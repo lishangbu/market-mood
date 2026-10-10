@@ -1,18 +1,45 @@
+# Build output and dependencies
 /bin/
+/frontend/node_modules/
+/frontend/dist/
+*.tsbuildinfo
+
+# Tests and coverage
+/frontend/test-results/
+/frontend/playwright-report/
+*.test
+coverage.out
+/coverage/
+/frontend/coverage/
+
+# Runtime data and SQLite auxiliary files
+/data/
 *.db
 *.db-shm
 *.db-wal
-/frontend/node_modules/
-/frontend/dist/
-/frontend/test-results/
-/frontend/playwright-report/
-*.tsbuildinfo
+*.db-journal
+*.log
 
-/data/
+# Local environment settings
 .env
 .env.*
 !.env.example
-*.log
+
+# GoLand / JetBrains personal project settings
+.idea/
+*.iml
+
+# VS Code personal workspaces; shared .vscode configuration can be committed
+*.code-workspace
+
+# Editor temporary files
+*.swp
+*.swo
+*~
+
+# Python tooling cache
 __pycache__/
 *.pyc
+
+# Operating system metadata
 .DS_Store
