@@ -23,6 +23,7 @@
     <li><a href="#参与贡献">参与贡献</a></li>
     <li><a href="#许可">许可</a></li>
     <li><a href="#联系">联系</a></li>
+    <li><a href="#致谢">致谢</a></li>
   </ol>
 </details>
 
@@ -157,5 +158,17 @@ CGO_ENABLED=0 go run ./cmd/sourcecheck -catalog -timeout 4m
 ## 联系
 
 项目维护者：[lishangbu](https://github.com/lishangbu)。项目问题请提交到 [market-mood Issues](https://github.com/lishangbu/market-mood/issues)。
+
+## 致谢
+
+感谢以下开源项目及其维护者为本项目提供基础能力：
+
+- [Go](https://go.dev/) 与 [modernc.org/sqlite](https://pkg.go.dev/modernc.org/sqlite)：后端服务和纯 Go SQLite 支持。
+- [React](https://react.dev/)、[TypeScript](https://www.typescriptlang.org/) 与 [Vite](https://vite.dev/)：网页界面和前端构建。
+- [Lucide](https://lucide.dev/)：界面图标。
+- [Playwright](https://playwright.dev/)：浏览器自动化测试。
+- [AKShare](https://github.com/akfamily/akshare)：新浪 KLC 数据解码的参考实现与测试对照，相关 MIT 许可随参考代码保留。
+
+同时感谢腾讯财经、新浪财经、东方财富、同花顺，以及沪深北交易所和巨潮资讯提供可核验的行情与公司资料。数据接口的可用性和字段含义以各来源实际响应为准。
 
 <p align="right"><a href="#readme-top">返回顶部</a></p>
